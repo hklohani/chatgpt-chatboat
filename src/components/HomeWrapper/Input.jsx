@@ -1,40 +1,50 @@
 import React, { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import LoadingIcon from "src/icons/LoadingIcon";
 import {
   useAddChatGroupMutation,
   useAddChatMutation,
 } from "src/services/api/chatApi";
 import SendIcon from "../../icons/SendIcon";
+import ScrollToEnd from "../ScrollToEnd";
 
 const Input = ({ groupId }) => {
-  const [addChat, { isLoading }] = useAddChatMutation();
-  const [addChatGroup, { isLoading: isAdding }] = useAddChatGroupMutation();
+  const [addChat] = useAddChatMutation();
+  const [addChatGroup] = useAddChatGroupMutation();
   const [inputs, setInputs] = React.useState({});
+  const [showError, setShowError] = React.useState(false);
+  const sendingInput = useSelector((state) => state.loading.sendingInput);
+
   const ref = useRef(null);
 
   const navigate = useNavigate();
   const handleSend = async (e) => {
     e.preventDefault();
-    if (!groupId) {
-      const res = await addChatGroup();
-      addChat({
-        user_input: inputs.user_input,
-        chat_group: res.data.data.id,
-      });
-      navigate(`/chat/${res.data.data.id}`);
+    if (!inputs.user_input) {
+      setShowError(true);
     } else {
-      addChat({
-        user_input: inputs.user_input,
-        chat_group: groupId,
-      });
+      if (!groupId) {
+        const res = await addChatGroup();
+        addChat({
+          user_input: inputs.user_input,
+          chat_group: res.data.data.id,
+        });
+        navigate(`/chat/${res.data.data.id}`);
+      } else {
+        addChat({
+          user_input: inputs.user_input,
+          chat_group: groupId,
+        });
+      }
+      setInputs((values) => ({ ...values, user_input: "" }));
     }
-    setInputs((values) => ({ ...values, user_input: "" }));
   };
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
+    setShowError(false);
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
@@ -49,25 +59,32 @@ const Input = ({ groupId }) => {
   });
   return (
     <form onSubmit={handleSend}>
-      <div className="w-full bg-white border-t shadow-2xl	 text-center py-6 flex justify-center">
+      <div className="w-full relative bg-white border-t shadow-2xl	 text-center py-12 flex justify-center">
         <div className="w-1/2 flex">
-          <input
-            ref={ref}
-            type="search"
-            x-model="input"
-            name="user_input"
-            className="shadow w-full h-12 px-4 rounded-md border border-gray-100 text-gray-800 focus:outline-none"
-            placeholder="Type to search..."
-            value={inputs.user_input || ""}
-            onChange={handleChange}
-            onKeyDown={handleKeyDown}
-          />
+          <div className="w-full relative">
+            <input
+              rows={1}
+              ref={ref}
+              type="search"
+              x-model="input"
+              name="user_input"
+              className="resize-none shadow w-full h-12 px-4 rounded-md border  text-gray-800 focus:outline-none"
+              placeholder="Type to search..."
+              value={inputs.user_input || ""}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+            />
+            {showError && (
+              <span className="absolute flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                Please type valid input!
+              </span>
+            )}
+          </div>
           <button
             type="submit"
-            disabled={isLoading}
             className="shadow inline-flex items-center justify-center w-12 h-12 ml-2 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800"
           >
-            {isLoading ? <LoadingIcon /> : <SendIcon />}
+            {sendingInput ? <LoadingIcon /> : <SendIcon />}
           </button>
         </div>
       </div>

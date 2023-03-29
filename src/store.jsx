@@ -1,4 +1,8 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import {
+  combineReducers,
+  configureStore,
+  getDefaultMiddleware,
+} from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import storage from "redux-persist/lib/storage";
 import {
@@ -13,6 +17,9 @@ import {
 } from "redux-persist";
 import { emptySplitApi } from "./services/api/emptySplitApi";
 import authReducer from "./services/slice/authSlice";
+import chatReducer from "./services/slice/chatSlice";
+import loadingReducer from "./services/slice/loadingSlice";
+import { rtkQueryErrorLogger } from "./services/rtkQueryErrorLogger";
 const persistConfig = {
   key: "auth",
   version: 1,
@@ -22,6 +29,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  chat: chatReducer,
+  loading: loadingReducer,
   [emptySplitApi.reducerPath]: emptySplitApi.reducer,
 });
 
@@ -36,7 +45,7 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     })
-      // .concat(errorHandler)
+      .concat(rtkQueryErrorLogger)
       .concat(emptySplitApi.middleware),
 });
 export const persistor = persistStore(store);

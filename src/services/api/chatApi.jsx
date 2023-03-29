@@ -10,6 +10,21 @@ export const chatApi = emptySplitApi.injectEndpoints({
       }),
       invalidatesTags: ["ChatGroup"],
     }),
+    deleteChatGroup: builder.mutation({
+      query: (id) => ({
+        url: `chat-group/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["ChatGroup", "Chat"],
+    }),
+    deleteAllChatGroup: builder.mutation({
+      query: (body) => ({
+        url: `chat-group-delete`,
+        method: "DELETE",
+        body,
+      }),
+      invalidatesTags: ["ChatGroup", "Chat"],
+    }),
     addChat: builder.mutation({
       query: (body) => ({
         url: "chats",
@@ -20,11 +35,23 @@ export const chatApi = emptySplitApi.injectEndpoints({
     }),
     getChats: builder.query({
       query: ({ groupId }) => `chats?group_id=${groupId}`,
-      providesTags: ["Chat"],
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.data.map(({ id }) => ({ type: "Chat", id })),
+              { type: "Chat", id: "LIST" },
+            ]
+          : [{ type: "Chat", id: "LIST" }],
     }),
     getChatGroup: builder.query({
       query: (name) => `chat-group`,
-      providesTags: ["ChatGroup"],
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.data.map(({ id }) => ({ type: "ChatGroup", id })),
+              { type: "ChatGroup", id: "LIST" },
+            ]
+          : [{ type: "ChatGroup", id: "LIST" }],
     }),
   }),
 });
@@ -34,4 +61,6 @@ export const {
   useAddChatGroupMutation,
   useGetChatsQuery,
   useGetChatGroupQuery,
+  useDeleteChatGroupMutation,
+  useDeleteAllChatGroupMutation,
 } = chatApi;

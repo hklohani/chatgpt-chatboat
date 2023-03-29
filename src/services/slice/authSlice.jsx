@@ -9,6 +9,11 @@ const authSlice = createSlice({
       state.user = user;
       state.token = token;
     },
+    resetState: (state) => {
+      state.user = null;
+      state.token = null;
+      state.redirect = null;
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -30,7 +35,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCredentials } = authSlice.actions;
+export const { setCredentials, resetState } = authSlice.actions;
 
 export default authSlice.reducer;
 
