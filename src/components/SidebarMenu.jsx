@@ -12,17 +12,15 @@ import {
 } from "src/services/api/chatApi";
 import ChatTitleList from "./ChatTitleList";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-const Sidebar = ({ setMode, mode }) => {
-  const sendingInput = useSelector((state) => state.loading.sendingInput);
-  const newChatButtonDisable = useSelector(
-    (state) => state.chat.newChatButtonDisable
+import { useDispatch, useSelector } from "react-redux";
+import { setNewChatGroupId } from "src/services/slice/chatSlice";
+const SidebarMenu = () => {
+  const { newChatButtonDisable, newChatGroupId } = useSelector(
+    (state) => state.chat
   );
-  const [open, setOpen] = useState(true);
-  const [count, setCount] = useState(5);
   const [logout, { isLoading: loggingOut }] = useLogoutMutation();
   const [addChatGroup, { isLoading: isAdding }] = useAddChatGroupMutation();
-
+  const dispatch = useDispatch();
   const [deleteAllChatGroup, { isLoading: isDeleting, isError, isSuccess }] =
     useDeleteAllChatGroupMutation();
   const navigate = useNavigate();
@@ -30,38 +28,40 @@ const Sidebar = ({ setMode, mode }) => {
     {
       title: "Clear",
       icon: DeleteIcon(),
-      onClick: () => {
-        deleteAllChatGroup();
+      onClick: async () => {
+        await deleteAllChatGroup();
+        dispatch(setNewChatGroupId({ id: null }));
+        navigate("/");
       },
     },
     { title: "Logout", src: "Logout", icon: LogoutIcon(), onClick: logout },
   ];
 
   const addGroup = async () => {
-    const res = await addChatGroup();
-    navigate(`/chat/${res.data.data.id}`);
+    if (newChatGroupId) {
+      navigate(`/chat/${newChatGroupId}`);
+    } else {
+      const res = await addChatGroup();
+      dispatch(setNewChatGroupId({ id: res.data.data.id }));
+      navigate(`/chat/${res.data.data.id}`);
+    }
   };
 
   return (
-    <div
-      className={` ${
-        open ? "w-80" : "w-20 "
-      } bg-zinc-800 flex flex-col h-screen relative duration-300 justify-between`}
-    >
+    <>
       <div className="sidebar-scrollbar overflow-y-auto overflow-x-hidden">
         <div className="my-4 p-2">
           <Button
             title="New Chat"
             icon={AddIcon()}
             onClick={addGroup}
-            disabled={sendingInput || newChatButtonDisable}
+            disabled={newChatButtonDisable}
           />
         </div>
         <div className="p-2 flex flex-col gap-2 overflow-y-auto overflow-x-hidden">
-          <ChatTitleList open={open} />
+          <ChatTitleList />
         </div>
       </div>
-
       <ul className="p-2 flex flex-col justify-end ">
         {Menus.map((Menu, index) => (
           <li
@@ -71,14 +71,12 @@ const Sidebar = ({ setMode, mode }) => {
             onClick={Menu.onClick}
           >
             {Menu.icon}
-            <span className={`${!open && "hidden"} origin-left duration-200`}>
-              {Menu.title}
-            </span>
+            <span className={` origin-left duration-200`}>{Menu.title}</span>
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 };
 
-export default Sidebar;
+export default SidebarMenu;

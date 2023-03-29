@@ -6,8 +6,7 @@ import {
   useAddChatGroupMutation,
   useAddChatMutation,
 } from "src/services/api/chatApi";
-import SendIcon from "../../icons/SendIcon";
-import ScrollToEnd from "../ScrollToEnd";
+import SendIcon from "../../../icons/SendIcon";
 
 const Input = ({ groupId }) => {
   const [addChat] = useAddChatMutation();
@@ -59,8 +58,8 @@ const Input = ({ groupId }) => {
   });
   return (
     <form onSubmit={handleSend}>
-      <div className="w-full relative bg-white border-t shadow-2xl	 text-center py-12 flex justify-center">
-        <div className="w-1/2 flex">
+      <div className="w-full relative bg-white border-t shadow-2xl	 text-center py-6 lg:py-12 flex justify-center">
+        <div className="w-full lg:w-1/2 flex px-4 lg:p-0">
           <div className="w-full relative">
             <input
               rows={1}

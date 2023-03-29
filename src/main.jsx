@@ -1,11 +1,42 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import "./index.css";
-import router from "./routes/router";
 import { Provider } from "react-redux";
 import store, { persistor } from "./store";
 import { PersistGate } from "redux-persist/integration/react";
+import Root from "./routes/root";
+import Chat from "./routes/chat";
+import Login from "./routes/login";
+import ErrorPage from "./error-page";
+import Index from "./routes";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "chat",
+        element: <Navigate to="/" replace />,
+      },
+      { index: true, element: <Index /> },
+      {
+        path: "chat/:id",
+        element: <Chat />,
+      },
+    ],
+  },
+  {
+    path: "login",
+    element: <Login />,
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

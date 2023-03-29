@@ -14,11 +14,11 @@ const ChatList = ({ groupId }) => {
     { skip: !groupId }
   );
 
-  useEffect(() => {
-    if (data && data.data.length === 0) {
-      dispatch(setNewChatButtonDisable({ disable: true }));
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data && data.data.length === 0) {
+  //     dispatch(setNewChatButtonDisable({ disable: true }));
+  //   }
+  // }, [data]);
 
   if (isLoading) {
     return <Loading />;
@@ -31,9 +31,9 @@ const ChatList = ({ groupId }) => {
           key={item.id}
           className={`flex flex-col ${idx === 0 ? " " : "border-t"} py-4`}
         >
-          <div className="w-1/2 self-center py-2">
+          <div className="w-full p-4 lg:p-0 lg:w-1/2 self-center py-2">
             <div className="flex flex-col items-start">
-              <div className=" flex mb-2 justify-start ">
+              <div className=" flex my-2 justify-start ">
                 <div className="w-min  text-sm font-normal leading-none  flex-initial rounded-r-full  py-1 text-green-700 ">
                   You
                 </div>
@@ -43,9 +43,9 @@ const ChatList = ({ groupId }) => {
               </div>
             </div>
           </div>
-          <div className="w-1/2 self-center py-2">
+          <div className="w-full p-4 lg:p-0 lg:w-1/2 self-center py-2">
             <div className="flex flex-col items-start">
-              <div className=" flex mb-2 justify-start ">
+              <div className=" flex my-2 justify-start ">
                 <div className="w-min  text-sm font-normal leading-none  flex-initial rounded-r-full  py-1  text-yellow-700  ">
                   Chatgpt
                 </div>
@@ -55,8 +55,6 @@ const ChatList = ({ groupId }) => {
                   className="font-serif text-xl"
                   style={{ whiteSpace: "break-spaces", lineBreak: "auto" }}
                 >
-                  {/* {item.bot_output} */}
-
                   {item?.bot_output.split("\n").map((item, key) => {
                     if (item === "") {
                       return null;
@@ -93,7 +91,9 @@ const ChatList = ({ groupId }) => {
           </div>
         </div>
       )}
-      <ScrollToEnd data={data} sendingInput={sendingInput} />
+      <div className="lg:block  hidden">
+        <ScrollToEnd data={data} sendingInput={sendingInput} />
+      </div>
     </div>
   );
 };

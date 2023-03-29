@@ -1,8 +1,4 @@
-import {
-  combineReducers,
-  configureStore,
-  getDefaultMiddleware,
-} from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import storage from "redux-persist/lib/storage";
 import {
@@ -21,10 +17,10 @@ import chatReducer from "./services/slice/chatSlice";
 import loadingReducer from "./services/slice/loadingSlice";
 import { rtkQueryErrorLogger } from "./services/rtkQueryErrorLogger";
 const persistConfig = {
-  key: "auth",
+  key: "root",
   version: 1,
   storage,
-  whitelist: ["auth"],
+  whitelist: ["auth", "chat"],
 };
 
 const rootReducer = combineReducers({
@@ -40,7 +36,6 @@ const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      // Redux persist
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },

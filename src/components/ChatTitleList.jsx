@@ -1,36 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, redirect, useNavigate, useParams } from "react-router-dom";
 import ChatIcon from "src/icons/ChatIcon";
 import DeleteIcon from "src/icons/DeleteIcon";
 import {
   useDeleteChatGroupMutation,
   useGetChatGroupQuery,
 } from "src/services/api/chatApi";
+import { setNewChatGroupId } from "src/services/slice/chatSlice";
 
-const ChatTitleList = ({ open }) => {
+const ChatTitleList = () => {
+  const { deleteChatGroupButtomDisable, newChatGroupId } = useSelector(
+    (state) => state.chat
+  );
   const { data, error, isLoading, isFetching } = useGetChatGroupQuery();
-  const [count, setCount] = useState(0);
   const [deleteChatGroup, { isLoading: isDeleting, isError, isSuccess }] =
     useDeleteChatGroupMutation();
   const params = useParams();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (data && data.data.length !== 0 && count === 0) {
-      navigate(`/chat/${data?.data[0].id}`);
-      setCount(1);
-    }
-    if (data && data.data.length !== 0 && isSuccess) {
-      navigate(`/chat/${data?.data[0].id}`);
-    }
-    if (data && data.data.length === 0) {
-      navigate(`/chat`);
-    }
-  }, [data]);
+  const dispatch = useDispatch();
 
   const handleDelete = async (id) => {
     await deleteChatGroup(id);
+    if (id === newChatGroupId) {
+      dispatch(setNewChatGroupId({ id: null }));
+    }
+    navigate("/");
   };
+
   return data?.data?.map((item) => (
     <Link
       key={item.id}
@@ -39,23 +36,16 @@ const ChatTitleList = ({ open }) => {
       }`}
       to={`/chat/${item.id}`}
     >
-      {!open ? (
-        <p className="text-white">1</p>
-      ) : (
-        <>
-          <ChatIcon />
-          <p className="text-gray-300 ">{item.title}</p>
-        </>
-      )}
+      <ChatIcon />
+      <p className="text-gray-300 ">{item.title}</p>
       {item.id == params.id && (
-        <div
+        <button
+          disabled={deleteChatGroupButtomDisable}
           className="absolute right-0 transition transform  ease-in-out  rounded-full p-1 cursor-pointer "
           onClick={() => handleDelete(item.id)}
         >
-          <span className="text-gray-300">
-            <DeleteIcon />
-          </span>
-        </div>
+          <DeleteIcon />
+        </button>
       )}
     </Link>
   ));
