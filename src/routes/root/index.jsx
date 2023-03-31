@@ -24,12 +24,8 @@ const Root = () => {
         <div
           className={`bg-slate-50 h-screen w-full flex flex-col justify-between`}
         >
-          <div
-            className={`bg-slate-50 h-screen w-full flex flex-col justify-between`}
-          >
-            <Outlet />
-            <Input groupId={params.id} />
-          </div>
+          <Outlet />
+          <Input groupId={params.id} />
         </div>
       </div>
     </>

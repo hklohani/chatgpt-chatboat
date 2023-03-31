@@ -8,6 +8,7 @@ import {
   useGetChatGroupQuery,
 } from "src/services/api/chatApi";
 import { setNewChatGroupId } from "src/services/slice/chatSlice";
+import Loading from "./Loading";
 
 const ChatTitleList = () => {
   const { deleteChatGroupButtomDisable, newChatGroupId } = useSelector(
@@ -28,6 +29,9 @@ const ChatTitleList = () => {
     navigate("/");
   };
 
+  if (isLoading) {
+    return <Loading size="sm" />;
+  }
   return data?.data?.map((item) => (
     <Link
       key={item.id}
@@ -37,11 +41,11 @@ const ChatTitleList = () => {
       to={`/chat/${item.id}`}
     >
       <ChatIcon />
-      <p className="text-gray-300 ">{item.title}</p>
+      <p className="text-gray-300 whitespace-nowrap">{item.title}</p>
       {item.id == params.id && (
         <button
           disabled={deleteChatGroupButtomDisable}
-          className="absolute right-0 transition transform  ease-in-out  rounded-full p-1 cursor-pointer "
+          className="bg-gray-600 absolute h-full right-0 transition transform ease-in-out bg-bottom rounded-lg p-1 cursor-pointer hover:bg-gray-700 "
           onClick={() => handleDelete(item.id)}
         >
           <DeleteIcon />

@@ -21,7 +21,7 @@ const ChatList = ({ groupId }) => {
   // }, [data]);
 
   if (isLoading) {
-    return <Loading />;
+    return <Loading size="md" />;
   }
 
   return (
@@ -73,7 +73,7 @@ const ChatList = ({ groupId }) => {
         </div>
       ))}
       {sendingInput && (
-        <div className="w-1/2 self-center py-2">
+        <div className="self-center p-4 lg:p-0 w-full lg:w-1/2">
           <div className="flex flex-col items-start">
             <div className=" flex mb-2 justify-start ">
               <div className="w-max  text-sm font-normal leading-none  flex-initial   py-1  text-yellow-700  ">

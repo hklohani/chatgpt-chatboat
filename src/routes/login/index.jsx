@@ -29,7 +29,7 @@ export default function Login() {
 
   return (
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
-      <div className="w-full border p-6 m-auto bg-white rounded-md shadow-lg lg:max-w-xl">
+      <div className="w-full lg:border p-6 m-auto bg-white rounded-md  lg:max-w-xl">
         <h1 className="text-3xl font-semibold text-center text-indigo-700 uppercase">
           Sign in
         </h1>
