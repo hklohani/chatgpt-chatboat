@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { chatApi } from "../api/chatApi";
+import { createSlice } from '@reduxjs/toolkit';
+import { chatApi } from '../api/chatApi';
 
 const loadingSlice = createSlice({
-  name: "loading",
+  name: 'loading',
   initialState: { sendingInput: false },
   reducers: {
     setCredentials: (state, { payload: { user, token } }) => {

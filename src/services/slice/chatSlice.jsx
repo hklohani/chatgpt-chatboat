@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { chatApi } from "../api/chatApi";
+import { createSlice } from '@reduxjs/toolkit';
+import { chatApi } from '../api/chatApi';
 
 const chatSlice = createSlice({
-  name: "chat",
+  name: 'chat',
   initialState: {
     newChatButtonDisable: false,
     deleteChatGroupButtomDisable: false,

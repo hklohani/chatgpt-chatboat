@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
-import MobileNav from "src/components/MobileNav";
-import Input from "./helper/Input";
-import Sidebar from "./helper/Sidebar";
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import MobileNav from 'src/components/MobileNav';
+import Input from './helper/Input';
+import Sidebar from './helper/Sidebar';
 
 const Root = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Root = () => {
 
   useEffect(() => {
     if (!token) {
-      navigate("/login");
+      navigate('/login');
     }
   }, [token]);
 
@@ -21,9 +21,7 @@ const Root = () => {
       <MobileNav />
       <div className="flex">
         <Sidebar />
-        <div
-          className={`bg-slate-50 h-screen w-full flex flex-col justify-between`}
-        >
+        <div className={`bg-slate-50 h-screen w-full flex flex-col justify-end relative`}>
           <Outlet />
           <Input groupId={params.id} />
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const AddIcon = () => {
   return (
@@ -10,11 +10,7 @@ const AddIcon = () => {
       stroke="currentColor"
       className="w-6 h-6 text-white"
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12 4.5v15m7.5-7.5h-15"
-      />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
     </svg>
   );
 };

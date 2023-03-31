@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-const Button = ({ title = "", icon = null, onClick, disabled = false }) => {
+const Button = ({ title = '', icon = null, onClick, disabled = false }) => {
   return (
     <button
       disabled={disabled}

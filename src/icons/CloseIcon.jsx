@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const CloseIcon = () => {
   return (
@@ -10,11 +10,7 @@ const CloseIcon = () => {
       stroke="currentColor"
       className="w-6 h-6"
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M6 18L18 6M6 6l12 12"
-      />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
   );
 };

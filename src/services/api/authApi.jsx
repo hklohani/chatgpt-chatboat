@@ -1,18 +1,18 @@
-import { emptySplitApi } from "./emptySplitApi";
+import { emptySplitApi } from './emptySplitApi';
 
 export const authApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (body) => ({
-        url: "auth/login",
-        method: "POST",
+        url: 'auth/login',
+        method: 'POST',
         body,
       }),
     }),
     logout: builder.mutation({
       query: (body) => ({
-        url: "auth/logout",
-        method: "POST",
+        url: 'auth/logout',
+        method: 'POST',
         // body: body,
       }),
     }),

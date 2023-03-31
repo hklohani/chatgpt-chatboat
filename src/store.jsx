@@ -1,26 +1,17 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { setupListeners } from "@reduxjs/toolkit/query";
-import storage from "redux-persist/lib/storage";
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
-import { emptySplitApi } from "./services/api/emptySplitApi";
-import authReducer from "./services/slice/authSlice";
-import chatReducer from "./services/slice/chatSlice";
-import loadingReducer from "./services/slice/loadingSlice";
-import { rtkQueryErrorLogger } from "./services/rtkQueryErrorLogger";
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
+import storage from 'redux-persist/lib/storage';
+import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import { emptySplitApi } from './services/api/emptySplitApi';
+import authReducer from './services/slice/authSlice';
+import chatReducer from './services/slice/chatSlice';
+import loadingReducer from './services/slice/loadingSlice';
+import { rtkQueryErrorLogger } from './services/rtkQueryErrorLogger';
 const persistConfig = {
-  key: "root",
+  key: 'root',
   version: 1,
   storage,
-  whitelist: ["auth", "chat"],
+  whitelist: ['auth', 'chat'],
 };
 
 const rootReducer = combineReducers({

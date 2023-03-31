@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
 const ScrollToEnd = ({ data, sendingInput }) => {
   let messagesEnd;
 
   const scrollToBottom = () => {
-    messagesEnd.scrollIntoView({ behavior: "smooth" });
+    messagesEnd.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -16,14 +16,14 @@ const ScrollToEnd = ({ data, sendingInput }) => {
   return (
     <>
       <div
-        style={{ float: "left", clear: "both" }}
+        style={{ float: 'left', clear: 'both' }}
         ref={(el) => {
           messagesEnd = el;
         }}
       />
       <button
         onClick={scrollToBottom}
-        className="cursor-pointer absolute right-6 bottom-12 z-10 rounded-full border border-gray-200 bg-gray-50 text-gray-600 dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
+        className="cursor-pointer absolute right-6 bottom-6 z-10 rounded-full border border-gray-200 bg-gray-50 text-gray-600 dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
       >
         <svg
           stroke="currentColor"
