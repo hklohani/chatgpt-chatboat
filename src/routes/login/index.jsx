@@ -11,7 +11,6 @@ export default function Login() {
   const [inputs, setInputs] = useState({ email: 'himanshu@unicepts.in', password: 'Admin@123' });
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
-  console.log(import.meta.env.BASE_URL);
 
   useEffect(() => {
     if (token) {
@@ -29,8 +28,6 @@ export default function Login() {
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
   };
-
-  console.log(error);
 
   return (
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">

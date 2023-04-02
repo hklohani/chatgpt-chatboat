@@ -19,24 +19,24 @@ const ChatList = ({ groupId }) => {
         <div key={item.id} className={`flex flex-col ${idx === 0 ? ' ' : 'border-t'} py-4`}>
           <div className="w-full p-4 lg:p-0 lg:w-1/2 self-center py-2">
             <div className="flex flex-col items-end">
-              <div className="relative whitespace-break-spaces tracking-wide font-serif text-md lg:text-xl bg-white py-2 px-4 shadow-sm rounded-xl border">
-                <div className=" flex mb-2 justify-end ">
-                  <div className="w-min  text-lg font-normal leading-none  flex-initial rounded-r-full  py-1 text-green-700 ">
-                    You
-                  </div>
+              <div className=" flex mb-2 justify-end ">
+                <div className="w-min  text-lg font-normal leading-none  flex-initial rounded-r-full  py-1 text-green-700 ">
+                  You
                 </div>
+              </div>
+              <div className="relative whitespace-break-spaces tracking-wide font-serif text-md lg:text-xl bg-white py-2 px-4 shadow-sm rounded-xl border">
                 <div>{item.user_input}</div>
               </div>
             </div>
           </div>
           <div className="w-full p-4 lg:p-0 lg:w-1/2 self-center py-2">
             <div className="flex flex-col items-start">
-              <div className="relative whitespace-break-spaces tracking-wide font-serif text-md lg:text-xl bg-white py-2 px-4 shadow-sm rounded-xl border">
-                <div className=" flex my-2 justify-start ">
-                  <div className="w-min  text-lg font-normal leading-none  flex-initial rounded-r-full  py-1  text-yellow-700  ">
-                    Chatgpt
-                  </div>
+              <div className=" flex my-2 justify-start ">
+                <div className="w-min  text-lg font-normal leading-none  flex-initial rounded-r-full  py-1  text-yellow-700  ">
+                  Chatgpt
                 </div>
+              </div>
+              <div className="relative whitespace-break-spaces tracking-wide font-serif text-md lg:text-xl bg-white py-2 px-4 shadow-sm rounded-xl border">
                 {item?.bot_output.split('\n').map((item, key) => {
                   if (item === '') {
                     return null;
