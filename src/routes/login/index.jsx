@@ -11,6 +11,7 @@ export default function Login() {
   const [inputs, setInputs] = useState({ email: 'himanshu@unicepts.in', password: 'Admin@123' });
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
+  console.log(import.meta.env.BASE_URL);
 
   useEffect(() => {
     if (token) {

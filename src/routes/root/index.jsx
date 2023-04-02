@@ -9,7 +9,6 @@ const Root = () => {
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
   const params = useParams();
-
   useEffect(() => {
     if (!token) {
       navigate('/login');
