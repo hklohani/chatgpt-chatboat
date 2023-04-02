@@ -13,7 +13,7 @@ const ChatList = ({ groupId }) => {
     return <Loading size="md" />;
   }
 
-  if (data?.data?.length === 0) {
+  if (data?.data?.length === 0 && !sendingInput) {
     return (
       <div className="flex flex-col items-center justify-center h-full">
         <div className="text-2xl font-semibold text-gray-500">No messages yet</div>
@@ -23,7 +23,7 @@ const ChatList = ({ groupId }) => {
   }
 
   return (
-    <div className="flex flex-col overflow-y-auto custom-scrolbar lg:pb-30 pb-20  pt-14 lg:pt-0">
+    <div className="flex flex-col overflow-y-auto custom-scrolbar lg:pb-30 pb-20  pt-14 lg:pt-0" id="scroll-container">
       {data?.data?.map((item, idx) => (
         <div key={item.id} className={`flex flex-col ${idx === 0 ? ' ' : 'border-t'} py-4`}>
           <div className="w-full p-4 lg:p-0 lg:w-1/2 self-center py-2">
@@ -76,7 +76,7 @@ const ChatList = ({ groupId }) => {
           </div>
         </div>
       )}
-      <div className="lg:block  hidden">
+      <div className="lg:block hidden relative">
         <ScrollToEnd data={data} sendingInput={sendingInput} />
       </div>
     </div>

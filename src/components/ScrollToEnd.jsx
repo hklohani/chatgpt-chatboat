@@ -1,27 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
-const scrollToBottom = (messagesEnd) => {
-  messagesEnd.scrollIntoView({ behavior: 'smooth',block: 'start', inline: 'nearest' });
-};
 const ScrollToEnd = ({ data, sendingInput }) => {
-  let messagesEnd;
+  const bottomRef = useRef(null);
   const { id } = useParams();
 
-  useEffect(() => {
-    if (messagesEnd) {
-      scrollToBottom(messagesEnd);
+  const scrollToBottom = () => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
     }
-  }, [messagesEnd, data, sendingInput, id]);
+  };
+  useEffect(() => {
+    const scrollContainer = document.getElementById('scroll-container');
+    scrollContainer.scrollTo({ top: scrollContainer.scrollHeight, behavior: 'smooth' });
+  }, [data, sendingInput, id]);
 
   return (
     <>
-      <div
-        style={{ float: 'left', clear: 'both' }}
-        ref={(el) => {
-          messagesEnd = el;
-        }}
-      />
+      <div ref={bottomRef} className="absolute bottom-0 left-0 right-0" />
       <button
         onClick={scrollToBottom}
         className="cursor-pointer absolute right-6 bottom-6 z-10 rounded-full border border-gray-200 bg-gray-50 text-gray-600 dark:border-white/10 dark:bg-white/10 dark:text-gray-200"
