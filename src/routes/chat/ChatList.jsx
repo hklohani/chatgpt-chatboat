@@ -13,6 +13,15 @@ const ChatList = ({ groupId }) => {
     return <Loading size="md" />;
   }
 
+  if (data?.data?.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-full">
+        <div className="text-2xl font-semibold text-gray-500">No messages yet</div>
+        <div className="text-lg font-semibold text-gray-500">Start a conversation</div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col overflow-y-auto custom-scrolbar lg:pb-30 pb-20  pt-14 lg:pt-0">
       {data?.data?.map((item, idx) => (

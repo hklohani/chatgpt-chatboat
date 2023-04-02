@@ -2,8 +2,9 @@ import React from 'react';
 
 const ChatList = () => {
   return (
-    <div className="w-full h-full items-center justify-center flex gap-8 overflow-y-auto custom-scrolbar">
-      <p className="text-[34px]">ChatGPT</p>
+    <div className="flex flex-col items-center justify-center h-full">
+      <div className="text-2xl font-semibold text-gray-500">No messages yet</div>
+      <div className="text-lg font-semibold text-gray-500">Start a conversation</div>
     </div>
   );
 };

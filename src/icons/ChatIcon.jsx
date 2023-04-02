@@ -8,7 +8,7 @@ const ChatIcon = () => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="w-5 h-5 text-white"
+      className="w-6 h-6 text-white"
     >
       <path
         strokeLinecap="round"
