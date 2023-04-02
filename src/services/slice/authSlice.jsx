@@ -17,8 +17,9 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addMatcher(authApi.endpoints.login.matchFulfilled, (state, { payload }) => {
-      state.user = { email: payload.email };
-      state.token = payload.auth_token;
+      console.log(payload);
+      state.user = payload.user;
+      state.token = payload.token;
       state.redirect = '/';
     });
     builder.addMatcher(authApi.endpoints.logout.matchFulfilled, (state, { payload }) => {

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { authApi } from '../api/authApi';
 import { chatApi } from '../api/chatApi';
 
 const chatSlice = createSlice({
@@ -22,6 +23,11 @@ const chatSlice = createSlice({
       state.deleteChatGroupButtomDisable = true;
     });
     builder.addMatcher(chatApi.endpoints.addChat.matchFulfilled, (state) => {
+      state.newChatButtonDisable = false;
+      state.deleteChatGroupButtomDisable = false;
+      state.newChatGroupId = null;
+    });
+    builder.addMatcher(authApi.endpoints.logout.matchFulfilled, (state, { payload }) => {
       state.newChatButtonDisable = false;
       state.deleteChatGroupButtomDisable = false;
       state.newChatGroupId = null;

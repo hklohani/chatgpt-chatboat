@@ -6,13 +6,11 @@ export const rtkQueryErrorLogger =
   (next) =>
   (action) => {
     try {
-      console.log('action', action);
       if (isRejectedWithValue(action)) {
         dispatch(resetState());
       }
       return next(action);
     } catch (error) {
-      console.log('error', error);
       return error;
     }
   };

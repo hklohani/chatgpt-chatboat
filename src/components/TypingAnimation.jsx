@@ -1,9 +1,19 @@
-const Typing = ({ size = 2, bg = 'slate-400' }) => (
-  <>
-    <div className={`typing__dot  w-${size} h-${size} bg-${bg}`} />
-    <div className={`typing__dot  w-${size} h-${size} bg-${bg}`} />
-    <div className={`typing__dot  w-${size} h-${size} bg-${bg}`} />
-  </>
-);
+import React from 'react';
+
+const Typing = ({ size = 8, bg = 'gray' }) => {
+  const style = {
+    width: `${size}px`,
+    height: `${size}px`,
+    backgroundColor: bg,
+  };
+
+  return (
+    <>
+      <div className={`typing__dot `} style={style} />
+      <div className={`typing__dot `} style={style} />
+      <div className={`typing__dot `} style={style} />
+    </>
+  );
+};
 
 export default Typing;

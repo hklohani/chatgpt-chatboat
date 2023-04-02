@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { authApi } from '../api/authApi';
 import { chatApi } from '../api/chatApi';
 
 const loadingSlice = createSlice({
@@ -15,6 +16,9 @@ const loadingSlice = createSlice({
       state.sendingInput = true;
     });
     builder.addMatcher(chatApi.endpoints.addChat.matchFulfilled, (state) => {
+      state.sendingInput = false;
+    });
+    builder.addMatcher(authApi.endpoints.logout.matchFulfilled, (state, { payload }) => {
       state.sendingInput = false;
     });
   },

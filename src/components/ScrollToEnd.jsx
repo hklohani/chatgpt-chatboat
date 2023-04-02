@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
+const scrollToBottom = (messagesEnd) => {
+  messagesEnd.scrollIntoView({ behavior: 'smooth',block: 'start', inline: 'nearest' });
+};
 const ScrollToEnd = ({ data, sendingInput }) => {
   let messagesEnd;
-
-  const scrollToBottom = () => {
-    messagesEnd.scrollIntoView({ behavior: 'smooth' });
-  };
+  const { id } = useParams();
 
   useEffect(() => {
     if (messagesEnd) {
-      scrollToBottom();
+      scrollToBottom(messagesEnd);
     }
-  }, [messagesEnd, data, sendingInput]);
+  }, [messagesEnd, data, sendingInput, id]);
 
   return (
     <>

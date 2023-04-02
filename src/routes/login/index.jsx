@@ -8,7 +8,7 @@ import _ from 'lodash';
 import Typing from 'src/components/TypingAnimation';
 export default function Login() {
   const [login, { isLoading, isError, error }] = useLoginMutation();
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState({ email: 'himanshu@unicepts.in', password: 'Admin@123' });
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
 
@@ -28,6 +28,8 @@ export default function Login() {
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
   };
+
+  console.log(error);
 
   return (
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
@@ -74,7 +76,7 @@ export default function Login() {
               disabled={isLoading}
               className="w-full flex justify-center items-center px-4   h-11 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700  rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
             >
-              {isLoading ? <Typing size={4} bg={'white'} /> : 'Login'}
+              {isLoading ? <Typing size={13} bg={'white'} /> : 'Login'}
             </button>
           </div>
         </form>

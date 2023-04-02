@@ -10,6 +10,7 @@ const focusInput = (ref) => {
   ref.current.focus();
 };
 const Input = ({ groupId }) => {
+  const navigate = useNavigate();
   const [addChat] = useAddChatMutation();
   const [addChatGroup] = useAddChatGroupMutation();
   const [inputs, setInputs] = React.useState({});
@@ -18,7 +19,6 @@ const Input = ({ groupId }) => {
 
   const ref = useRef(null);
 
-  const navigate = useNavigate();
   const handleSend = async (e) => {
     e.preventDefault();
     if (!inputs.user_input) {
@@ -73,19 +73,19 @@ const Input = ({ groupId }) => {
             name="user_input"
             className={`resize-none placeholder:italic ${
               showError ? 'placeholder:text-red-500 ' : 'placeholder:text-slate-400'
-            } w-full h-12 px-4 rounded-md border  text-gray-800 focus:outline-none `}
+            } w-full h-12 px-4 rounded-md border  text-gray-800 focus:outline-none pr-12`}
             placeholder={showError ? 'Please type valid input!' : 'Type to search...'}
             value={inputs.user_input || ''}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
           />
+          <button
+            type="submit"
+            className="absolute top-1 bottom-1 right-1 inline-flex items-center justify-center w-10 h-10 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-md focus:shadow-outline hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-blue-300 "
+          >
+            {sendingInput ? <LoadingIcon /> : <SendIcon />}
+          </button>
         </div>
-        <button
-          type="submit"
-          className=" inline-flex items-center justify-center w-12 h-12 ml-2 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800"
-        >
-          {sendingInput ? <LoadingIcon /> : <SendIcon />}
-        </button>
       </div>
     </form>
   );

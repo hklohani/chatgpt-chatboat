@@ -35,7 +35,7 @@ const ChatTitleList = () => {
       {data?.data?.map((item) => (
         <Link
           key={item.id}
-          className={`flex justify-start rounded-lg border-gray-400 shadow p-2 gap-4 items-center hover:bg-gray-700 transition  ease-in-out  transform ${
+          className={`flex justify-start rounded-lg border-gray-400  p-2 gap-4 items-center hover:bg-gray-700 transition  ease-in-out  transform ${
             item.id == params.id ? 'bg-gray-600' : ''
           }`}
           to={`/chat/${item.id}`}
@@ -45,7 +45,7 @@ const ChatTitleList = () => {
           {item.id == params.id && (
             <button
               disabled={deleteChatGroupButtomDisable}
-              className="bg-gray-600 absolute h-full right-0 transition transform ease-in-out bg-bottom rounded-lg p-1 cursor-pointer hover:bg-gray-700 "
+              className="bg-gray-600 absolute rounded-full right-0 transition transform ease-in-out bg-bottom p-1 cursor-pointer hover:bg-gray-700 "
               onClick={() => handleDelete(item.id)}
             >
               {isDeleting ? <LoadingIcon /> : <DeleteIcon />}

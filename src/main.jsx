@@ -11,28 +11,31 @@ import Login from './routes/login';
 import ErrorPage from './error-page';
 import Index from './routes';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Root />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: 'chat',
-        element: <Navigate to="/" replace />,
-      },
-      { index: true, element: <Index /> },
-      {
-        path: 'chat/:id',
-        element: <Chat />,
-      },
-    ],
-  },
-  {
-    path: 'login',
-    element: <Login />,
-  },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <Root />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: 'chat',
+          element: <Navigate to="/" replace />,
+        },
+        { index: true, element: <Index /> },
+        {
+          path: 'chat/:id',
+          element: <Chat />,
+        },
+      ],
+    },
+    {
+      path: 'login',
+      element: <Login />,
+    },
+  ],
+  { basename: process.env.PUBLIC_URL }
+);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
