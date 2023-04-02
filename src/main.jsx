@@ -34,7 +34,7 @@ const router = createBrowserRouter(
       element: <Login />,
     },
   ],
-  { basename: process.env.PUBLIC_URL }
+  { basename: import.meta.env.BASE_URL }
 );
 
 ReactDOM.createRoot(document.getElementById('root')).render(
