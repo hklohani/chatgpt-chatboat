@@ -58,11 +58,11 @@ const SidebarMenu = () => {
         {Menus.map((Menu, index) => (
           <li
             key={index}
-            className={`flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
+            className={`flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center
         ${Menu.gap ? 'mt-9' : 'mt-2'} ${index === 0 && 'bg-light-white'} `}
             onClick={Menu.onClick}
           >
-            {Menu.icon}
+            <span className='mr-3'>{Menu.icon}</span>
             <span className={` origin-left duration-200`}>{Menu.title}</span>
           </li>
         ))}

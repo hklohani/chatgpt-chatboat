@@ -35,13 +35,15 @@ const ChatTitleList = () => {
       {data?.data?.map((item) => (
         <Link
           key={item.id}
-          className={`flex justify-start rounded-lg border-gray-400  p-2 gap-4 items-center hover:bg-gray-700 transition  ease-in-out  transform ${
+          className={`flex justify-start rounded-lg border-gray-400  p-2 items-center hover:bg-gray-700 transition  ease-in-out  transform ${
             item.id == params.id ? 'bg-gray-600' : ''
           }`}
           to={`/chat/${item.id}`}
         >
-          <ChatIcon />
-          <p className="text-gray-300 whitespace-nowrap ">{item.title}</p>
+          <span className='mr-3'>
+            <ChatIcon />
+          </span>
+          <p className="text-gray-300 whitespace-nowrap">{item.title}</p>
           {item.id == params.id && (
             <button
               disabled={deleteChatGroupButtomDisable}
