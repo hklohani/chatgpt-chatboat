@@ -8,7 +8,7 @@ import _ from 'lodash';
 import Typing from 'src/components/TypingAnimation';
 export default function Login() {
   const [login, { isLoading, isError, error }] = useLoginMutation();
-  const [inputs, setInputs] = useState({ email: 'himanshu@unicepts.in', password: 'Admin@123' });
+  const [inputs, setInputs] = useState({ email: '', password: '' });
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
 
