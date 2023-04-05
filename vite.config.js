@@ -6,7 +6,7 @@ export default ({ mode }) => {
   const publicPath = isProduction ? '/chatgpt-frontend/dist/' : '/';
 
   return defineConfig({
-    base: './',
+    base: '/',
     plugins: [react()],
     resolve: {
       alias: {
