@@ -50,7 +50,12 @@ const SidebarMenu = () => {
     <>
       <div className="h-full">
         <div className="mb-4 p-2">
-          <Button title="New Chat" icon={AddIcon()} onClick={addGroup} disabled={newChatButtonDisable} />
+          <Button
+            title={isAdding ? <LoadingIcon /> : 'New Chat'}
+            icon={AddIcon()}
+            onClick={addGroup}
+            disabled={newChatButtonDisable}
+          />
         </div>
         <ChatTitleList />
       </div>
@@ -62,7 +67,7 @@ const SidebarMenu = () => {
         ${Menu.gap ? 'mt-9' : 'mt-2'} ${index === 0 && 'bg-light-white'} `}
             onClick={Menu.onClick}
           >
-            <span className='mr-3'>{Menu.icon}</span>
+            <span className="mr-3">{Menu.icon}</span>
             <span className={` origin-left duration-200`}>{Menu.title}</span>
           </li>
         ))}
