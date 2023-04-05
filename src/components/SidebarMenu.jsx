@@ -48,11 +48,10 @@ const SidebarMenu = () => {
 
   return (
     <>
-      <div className="sidebar-scrollbar overflow-y-auto overflow-x-hidden">
+      <div className='h-full'>
         <div className="mb-4 p-2">
           <Button title="New Chat" icon={AddIcon()} onClick={addGroup} disabled={newChatButtonDisable} />
         </div>
-
         <ChatTitleList />
       </div>
       <ul className="p-2 flex flex-col justify-end relative">

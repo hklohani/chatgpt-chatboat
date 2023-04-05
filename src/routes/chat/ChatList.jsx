@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import Loading from 'src/components/Loading';
 import ScrollToEnd from 'src/components/ScrollToEnd';
 import Typing from 'src/components/TypingAnimation';
@@ -42,7 +42,7 @@ const ChatList = ({ groupId }) => {
             <div className="flex flex-col items-start">
               <div className=" flex my-2 justify-start ">
                 <div className="w-min  text-lg font-normal leading-none  flex-initial rounded-r-full  py-1  text-yellow-700  ">
-                  Chatgpt
+                  Tattvam
                 </div>
               </div>
               <div className="relative whitespace-break-spaces tracking-wide font-serif text-md lg:text-xl bg-white py-2 px-4 shadow-sm rounded-xl border">
@@ -67,7 +67,7 @@ const ChatList = ({ groupId }) => {
           <div className="flex flex-col items-start">
             <div className=" flex mb-2 justify-start ">
               <div className="w-max  text-lg font-normal leading-none flex-initial py-1 text-yellow-700">
-                Chatgpt Typing
+                Tattvam Typing
               </div>
             </div>
             <div className="relative text-sm bg-white py-3 px-4 shadow-sm rounded-xl border">

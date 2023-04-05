@@ -29,6 +29,8 @@ export default function Login() {
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
+  console.log(error);
+
   return (
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
       <div className="w-full lg:border p-6 m-auto bg-white rounded-md  lg:max-w-xl">
@@ -60,9 +62,10 @@ export default function Login() {
           </div>
           {isError && (
             <ErrorFeedback
-              message={Object.entries(error.data ?? {})
-                .map(([key, value]) => `${_.startCase(_.camelCase(key))}: ${value.join('')}`)
-                .join(' ')}
+              // message={Object.entries(error.data ?? {})
+              //   .map(([key, value]) => `${_.startCase(_.camelCase(key))}: ${value.join('')}`)
+              //   .join(' ')}
+              message={error.data?.error}
             />
           )}
           <a href="#" className="text-xs text-indigo-600 hover:underline">

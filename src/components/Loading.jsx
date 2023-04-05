@@ -37,6 +37,8 @@ const LineComp = () => (
   </>
 );
 const Loading = ({ size = 'lg' }) => {
+  console.log(size);
+
   return (
     <div aria-label="Loading..." role="status " className="flex items-center justify-center h-full">
       {size === 'sm' ? (
