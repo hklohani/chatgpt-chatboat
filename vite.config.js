@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import html from 'vite-plugin-html';
+import { createHtmlPlugin } from 'vite-plugin-html'
 
 export default ({ mode }) => {
   const isProduction = mode === 'production';
@@ -10,7 +10,7 @@ export default ({ mode }) => {
     base: publicPath,
     plugins: [
       react(),
-      html({
+      createHtmlPlugin({
         minify: true, // minify the output HTML
         inject: {
           // inject a custom function to modify the generated HTML
