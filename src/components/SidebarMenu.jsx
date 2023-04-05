@@ -48,7 +48,7 @@ const SidebarMenu = () => {
 
   return (
     <>
-      <div className='h-full'>
+      <div className="h-full">
         <div className="mb-4 p-2">
           <Button title="New Chat" icon={AddIcon()} onClick={addGroup} disabled={newChatButtonDisable} />
         </div>
