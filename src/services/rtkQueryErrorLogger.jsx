@@ -7,7 +7,9 @@ export const rtkQueryErrorLogger =
   (action) => {
     try {
       if (isRejectedWithValue(action)) {
-        dispatch(resetState());
+        if (action.payload.status === 401) {
+          dispatch(resetState());
+        }
       }
       return next(action);
     } catch (error) {
